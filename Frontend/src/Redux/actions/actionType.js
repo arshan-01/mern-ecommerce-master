@@ -1,0 +1,16 @@
+export const FETCH_PRODUCT = "FETCH_PRODUCT";
+
+export const ADD_TO_CART = "ADD_TO_CART"
+export const CLEAR_CART = "CLEAR_CART"
+export const REMOVE_TO_CART = "REMOVE_TO_CART"
+export const INCREAMENT_QTY = "INCREAMENT_QTY";
+export const DECREAMENT_QTY = "DECREAMENT_QTY";
+
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FALIURE = "LOGIN_FALIURE";
+export const USER_LOGOUT = "USER_LOGOUT";
+export const USER_REGISTERED = "USER_REGISTERED";
+
+export const USER_ORDERS = "USER_ORDERS";
+export const USER_ORDERS_NULL = "USER_ORDERS_NULL";
