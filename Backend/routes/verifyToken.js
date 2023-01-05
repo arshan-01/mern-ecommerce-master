@@ -34,8 +34,8 @@ const verifyToken = (req, res, next) => {
           
           res.cookie("token", newToken, {
             httpOnly: true,
-            // secure: true,
-            // sameSite: "none",
+            secure: true,
+            sameSite: "none",
             maxAge: 3 * 24 * 60 * 60 * 1000, // valid for 3 Days
           });
         //RETURN USER FORM JWT PAYLOAD

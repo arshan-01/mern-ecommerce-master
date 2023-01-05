@@ -1,13 +1,14 @@
 require("dotenv").config();    // requiring dotenv config to use .env file variables
 const express = require("express");
 const mongoose = require("mongoose");
+var bodyParser = require('body-parser')
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 const orderRouter = require("./routes/order");
 const stripeRouter = require("./routes/stripe")
-var cookieParser = require("cookie-parser");
+var cookieParser = require("cookie-parser"); 
 const helmet = require('helmet')
 const rateLimit = require("express-rate-limit")
 const mongoSanitize = require("express-mongo-sanitize")
@@ -20,6 +21,12 @@ const app = express();
 app.use(helmet())
 
 
+
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Parse application/json
+app.use(bodyParser.json());
 
 //Body parser middleware
 app.use(express.json());
@@ -36,7 +43,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })

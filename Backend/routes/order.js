@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const { getDataFromWebhook } = require("./stripe");
 const {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
@@ -8,7 +9,11 @@ const router = require("express").Router();
 
 //Create Order
 router.post("/", verifyToken, async (req, res) => {
-  const newOrder = new Order(req.body);
+const {userId , products} = req.body;
+  
+  let DataFromWebhook = await getDataFromWebhook(userId , products);
+
+  const newOrder = new Order(DataFromWebhook);
   try {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);

@@ -25,60 +25,17 @@ const location = useLocation();
       });
 
       // Create a checkout link
-      const { data: { url },} = await userRequest.post("/checkout/create-checkout-link", {
+      const {  data: { url },} = await userRequest.post("/checkout/create-checkout-link", {
         token,
       });
-
-      window.location.href = url;
+        window.location.href =  url;
+         
+         
     } catch (error) {
       console.error(error);
     }
   };
   
-  const verifySignature = async (paymentNotification) => {
-    try {
-        // Send a request to the server to verify the payment notification
-        const response = await userRequest.post('/checkout/verify-signature', paymentNotification);
-        return response.status === 200;
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-};
-
-  useEffect(() => {
-    let url = window.location.search
-     paymentNotification = { 
-        "orderId": "T800",
-        "amount": 1000,
-        "currency": "PKR",
-        "status": "paid",
-    }; // payment notification data  
-    
-    console.log(url)
-    console.log(paymentNotification)
-    verifySignature(paymentNotification).then((isValidSignature) => {
-      if (isValidSignature) {
-        console.log("Thank You! Order placed successfully!")
-      } else {
-       console.log("Invalid signature");
-      }
-    });
-  });
-
-//   useEffect(() => {
-//     const webhookNotification = {
-//       // webhook notification data
-//     };
-
-//     verifyWebhook(webhookNotification).then((isValidWebhook) => {
-//       if (isValidWebhook) {
-//         // mark the invoice as paid
-//       } else {
-//         // show an error
-//       }
-//     });
-//   }, []);
   return (
     <button
       onClick={makeRequest}
@@ -98,20 +55,6 @@ const location = useLocation();
 export default SafePayButton;
 
 
-// const verifyWebhook = async (webhookNotification) => {
-//     try {
-//         // Send a request to the server to verify the webhook notification
-//         const response = await axios.post('/verify-webhook', webhookNotification);
-//         return response.status === 200;
-//     }
-//     catch (error) {
-//         console.error(error);
-//         return false;
-//     }
-// };
-    
-    
-    
     
     
     

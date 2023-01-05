@@ -3,10 +3,14 @@ import { userRequest } from "./Request";
 
 
 
-export const Order = async (message, userId , products ,amount ,address,dispatch,CLEAR__CART)=> {
+export const Order = async (message, userId , products ,dispatch,CLEAR__CART)=> {
 
     try {
-      const res = await userRequest.post ("/orders" , {userId , products ,amount ,address});
+      const res = await userRequest.post ("/orders" , {userId , products});
+      if (res.status === 200) {
+        message.success("Order Placed Successfully");
+        console.log("Order Placed Successfully");
+      }
          await dispatch (CLEAR__CART());
     } catch (error) {
       console.log("Something went wrong");
