@@ -7,34 +7,35 @@ import { CLEAR__CART } from "../../Redux/actions/Action";
 import { Order } from "../../RequestApiCalls/OrdersApiCalls";
 import { userRequest } from "../../RequestApiCalls/Request";
 
-const SafePayButton = ({ TotalBill, cart, UserId }) => {
-    let paymentNotification;
-  const bill = parseInt(TotalBill);
-  console.log(bill, cart);
+const SafePayButton = ({ TotalBill, cart, userId }) => {
+console.log(TotalBill, cart, userId);
+
 const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const makeRequest = async () => {
-    try {
-      const {
-        data: { token },
-      } = await userRequest.post("/checkout/payment", {
-        amount: bill,
-        currency: "PKR",
-      });
-
-      // Create a checkout link
-      const {  data: { url },} = await userRequest.post("/checkout/create-checkout-link", {
-        token,
-      });
-        window.location.href =  url;
-         
-         
-    } catch (error) {
-      console.error(error);
+    const makeRequest = async ()=>{
+     try {
+       const res =  await userRequest.post("/checkout/payment" , {
+        userId, 
+        cart
+       });
+ 
+       if (res.status === 200) {
+        console.log(res.data);
+         window.location.href = res.data.url;
+       }
+      //  swal("Thank You!", "Order placed successfully!", "success");
+ 
+      //  const OrderPayment = parseInt(TotalBill);;
+      //  const address = res.data.billing_details.address;
+      //  Order(message, userId, cart, OrderPayment , address,dispatch,CLEAR__CART)
+   } catch (error) {
+     // swal("Sorry!", `${error.response.data}`, "error");
+       console.log(error);
+   }
     }
-  };
+  
   
   return (
     <button
@@ -42,7 +43,7 @@ const location = useLocation();
       type="button"
       class="btn btn-primary btn-lg btn-block"
     >
-      Pay with SafePay
+      Pay with Stripe
     </button>
   );
 };

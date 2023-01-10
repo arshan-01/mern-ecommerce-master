@@ -74,8 +74,8 @@ router.post("/login", async (req, res) => {
        // Set the JWT as an HTTP-only cookie
        res.cookie("token", accessToken, { 
         httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        // secure: true,
+        // sameSite: "none",
          maxAge: 3 * 24 * 60 * 60 * 1000 // valid for 3 Days
         })
 

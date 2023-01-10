@@ -131,7 +131,7 @@ function CartPage() {
                   {
                     User ? 
                     
-                    <SafePayButton  TotalBill = {TotalBill} cart={cartData} UserId={User._id}  />
+                    <SafePayButton  TotalBill = {TotalBill} cart={cartData} userId={User._id}  />
                     :
                   <Link to='/Login'>
                   <button type="button" class="btn btn-primary btn-lg btn-block" >

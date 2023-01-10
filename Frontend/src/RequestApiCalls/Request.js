@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
-const BASE_URL = "https://jolly-frog-7.loca.lt";
+const BASE_URL = "http://localhost:5000";
 
 
 export const publicRequest = axios.create({
